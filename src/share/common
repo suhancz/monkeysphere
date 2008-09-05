@@ -182,7 +182,7 @@ lock() {
 	*)
 	    failure "bad argument for lock subfunction '$action'"
     esac
-}
+
 
 
 # for portability, between gnu date and BSD date.
