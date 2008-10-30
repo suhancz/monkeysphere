@@ -45,6 +45,13 @@ On debian-derived systems, you can set this up with:
 ######################################################################
 ### FUNCTIONS
 
+## make sure that the right tools are installed to run the test.  the
+## test has *more* requirements than plain ol' monkeysphere:
+
+[ -x $(which socat) ] || { echo "You must have socat installed to run this test." && exit 1 }
+
+## FIXME: other checks?
+
 # gpg command for test admin user
 gpgadmin() {
     chmod 0700 "$TEMPDIR"/admin "$TEMPDIR"/admin/.gnupg
