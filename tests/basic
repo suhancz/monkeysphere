@@ -48,7 +48,7 @@ On debian-derived systems, you can set this up with:
 ## make sure that the right tools are installed to run the test.  the
 ## test has *more* requirements than plain ol' monkeysphere:
 
-[ -x $(which socat) ] || { echo "You must have socat installed to run this test." && exit 1; }
+which socat || { echo "You must have socat installed to run this test." ; exit 1; }
 
 ## FIXME: other checks?
 
