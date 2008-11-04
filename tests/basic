@@ -47,7 +47,6 @@ On debian-derived systems, you can set this up with:
 
 ## make sure that the right tools are installed to run the test.  the
 ## test has *more* requirements than plain ol' monkeysphere:
-
 which socat || { echo "You must have socat installed to run this test." ; exit 1; }
 
 ## FIXME: other checks?
@@ -165,7 +164,6 @@ unset MONKEYSPHERE_SUBKEYS_FOR_AGENT
 
 export SSHD_CONFIG="$TEMPDIR"/sshd_config
 export SOCKET="$TEMPDIR"/ssh-socket
-export SSHD_PID=
 
 # Make sure $DISPLAY is set to convince ssh and monkeysphere to fall
 # back on $SSH_ASKPASS.  Make sure it's not set to the current actual
