@@ -281,6 +281,11 @@ echo "### getting host key fingerprint..."
 SSHHOSTKEYID=$( monkeysphere-host show-keys | grep '^OpenPGP fingerprint: ' | cut -f3 -d\  )
 echo "$SSHHOSTKEYID"
 
+echo "##################################################"
+echo "### getting host key fingerprint..."
+HOSTKEYID=$( monkeysphere-host show-key | grep '^OpenPGP fingerprint: ' | cut -f3 -d\  )
+echo "$HOSTKEYID"
+
 # change host key expiration
 echo
 echo "##################################################"
@@ -352,7 +357,7 @@ gpgadmin --armor --export "$SSHHOSTKEYID" | gpg --import
 echo
 echo "##################################################"
 echo "### export testuser key to server..."
-gpg --export testuser | monkeysphere-authentication expert gpg-cmd --import
+gpg --export testuser | monkeysphere-authentication gpg-cmd --import
 
 # update authorized_keys for user
 echo

@@ -107,8 +107,8 @@ gpg_core_sphere_sig_transfer() {
 	gpg_sphere "--import-options import-local-sigs --import" 2>&1 | log debug
 }
 
-# load the core fingerprint into the fingerprint variable, using the
-# gpg host secret key
+# output to stdout the core fingerprint from the gpg core secret
+# keyring
 core_fingerprint() {
     log debug "determining core key fingerprint..."
     gpg_core --quiet --list-secret-key \
