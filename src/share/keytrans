@@ -10,6 +10,16 @@
 
 
 
+# keytrans: this is an RSA key translation utility; it is capable of
+# transforming RSA keys (both public keys and secret keys) between
+# several popular representations, including OpenPGP, PEM-encoded
+# PKCS#1 DER, and OpenSSH-style public key lines.
+
+# How it behaves depends on the name under which it is invoked.  The
+# two implementations currently are: pem2openpgp and openpgp2ssh.
+
+
+
 # pem2openpgp: take a PEM-encoded RSA private-key on standard input, a
 # User ID as the first argument, and generate an OpenPGP secret key
 # and certificate from it.
