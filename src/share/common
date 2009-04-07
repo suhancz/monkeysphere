@@ -470,6 +470,23 @@ get_primary_group() {
     groups "$uname" | sed 's/^..* : //' | awk '{ print $1 }'
 }
 
+# return a list of all users on the system
+list_users() {
+    if type getent &>/dev/null ; then
+	# for linux and FreeBSD systems
+	getent passwd | cut -d: -f1
+    elif type dscl &>/dev/null ; then
+	# for Darwin systems
+	dscl localhost -list /Search/Users
+    fi
+}
+
+# return the path to the home directory of a user
+get_homedir() {
+    local uname=${1:-`whoami`}
+    eval "echo ~${uname}"
+}
+
 ### CONVERSION UTILITIES
 
 # output the ssh key for a given key ID
