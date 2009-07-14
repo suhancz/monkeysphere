@@ -208,6 +208,9 @@ diff -u "$TEMPDIR"/expectedout <( < "$TEMPDIR"/secring.gpg keytrans listfprs | s
 ## FIXME: addtest: not testing subkeys at the moment.
 
 
+## FIXME: addtest: not testing subkeys at the moment.
+
+
 trap - EXIT
 
 echo "##################################################"
