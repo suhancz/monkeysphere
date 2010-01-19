@@ -440,7 +440,7 @@ case $COMMAND in
 	update_pgp_pub_file
 	;;
 
-    'version'|'v')
+    'version'|'--version'|'v')
 	version
 	;;
 
