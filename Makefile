@@ -5,7 +5,7 @@
 # © 2008-2010 Daniel Kahn Gillmor <dkg@fifthhorseman.net>
 # Licensed under GPL v3 or later
 
-MONKEYSPHERE_VERSION:=$(shell head -n1 Changelog | sed 's/.*(\([^-]*\)).*/\1/')
+MONKEYSPHERE_VERSION = `head -n1 Changelog | sed 's/.*(\([^-]*\)).*/\1/'`
 
 # these defaults are for debian.  porters should probably adjust them
 # before calling make install
@@ -27,9 +27,6 @@ freebsd-distinfo:
 
 macports-portfile:
 	./utils/build-macports-portfile
-
-VERSION: Changelog
-	sed 's/^Monkeysphere .*$$/Monkeysphere '$(MONKEYSPHERE_VERSION)'/' -i VERSION
 
 debian-package:
 	debuild -uc -us
