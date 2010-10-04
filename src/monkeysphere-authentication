@@ -83,8 +83,6 @@ gpg_core() {
 }
 
 # function to interact with the gpg sphere keyring
-# FIXME: this function requires only a single argument because of
-# problems with quote expansion.  this needs to be fixed/improved.
 gpg_sphere() {
     GNUPGHOME="$GNUPGHOME_SPHERE"
     export GNUPGHOME
@@ -105,7 +103,7 @@ core_fingerprint() {
 gpg_core_sphere_sig_transfer() {
     log debug "exporting core local sigs to sphere..."
     gpg_core --export-options export-local-sigs --export | \
-	gpg_sphere "--import-options import-local-sigs --import" 2>&1 | log debug
+	gpg_sphere --import-options import-local-sigs --import 2>&1 | log debug
 }
 
 # output to stdout the core fingerprint from the gpg core secret
@@ -194,7 +192,7 @@ case $COMMAND in
     'refresh-keys'|'refresh'|'r')
 	source "${MASHAREDIR}/setup"
 	setup
-	gpg_sphere "--keyserver $KEYSERVER --refresh-keys"
+	gpg_sphere --keyserver "$KEYSERVER" --refresh-keys
 	;;
 
     'keys-for-user')
