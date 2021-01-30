@@ -1,6 +1,6 @@
 Name: monkeysphere
 Summary: Use the OpenPGP web of trust to verify SSH connections
-Version: 0.44
+Version: 0.45
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -98,6 +98,9 @@ exit 0
 
 
 %changelog
+* Sat Jan 30 2021 Akos Balla <akos.balla@sirc.hu> 0.45-1
+- new package built with tito
+
 * Sat Jan 30 2021 Akos Balla <akos.balla@sirc.hu> - 0.44-1
 - Create RPM package for 0.44
 
