@@ -1,6 +1,6 @@
 Name: monkeysphere
 Summary: Use the OpenPGP web of trust to verify SSH connections
-Version: 0.45
+Version: 0.44
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
