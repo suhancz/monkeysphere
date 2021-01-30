@@ -6,7 +6,7 @@ License: GPLv3+
 Group: Applications/Internet
 URL: http://web.monkeysphere.info/
 
-Source: http://archive.monkeysphere.info/debian/pool/%{name}/m/%{name}/%{name}_%{version}.orig.tar.gz
+Source: https://archive.monkeysphere.info/debian/pool/%{name}/m/%{name}/%{name}_%{version}.orig.tar.gz
 
 BuildArch: x86_64
 
