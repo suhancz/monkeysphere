@@ -1,19 +1,24 @@
 Name: monkeysphere
 Summary: Use the OpenPGP web of trust to verify SSH connections
-Version: 0.35
-Release: 2%{?dist}
+Version: 0.44
+Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
 URL: http://web.monkeysphere.info/
 
 Source: http://archive.monkeysphere.info/debian/pool/%{name}/m/%{name}/%{name}_%{version}.orig.tar.gz
 
-BuildArch: noarch
+BuildArch: x86_64
 
 Requires(pre): shadow-utils
 Requires: gnupg
 Requires: openssh-clients
 Requires: perl
+Requires: libgcrypt
+Requires: libbassuan
+BuildRequires: gcc
+BuildRequires: libgcrypt-devel
+BuildRequires: libassuan-devel
 
 
 %description
@@ -57,11 +62,12 @@ exit 0
 %files
 %defattr(-,root,root,-)
 %doc COPYING README Changelog src/transitions/
-%doc %dir %{_docdir}/%{name}
 %doc %{_docdir}/%{name}/Changelog
 %doc %{_docdir}/%{name}/examples/crontab
 %doc %{_docdir}/%{name}/examples/ssh_config
 %doc %{_docdir}/%{name}/examples/sshd_config
+%doc %{_docdir}/%{name}/examples/make-x509-certreqs
+%doc %{_docdir}/%{name}/examples/monkeysphere-monitor-keys
 
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}-authentication.conf
@@ -70,11 +76,13 @@ exit 0
 %{_bindir}/%{name}
 %{_bindir}/openpgp2ssh
 %{_bindir}/pem2openpgp
+%{_bindir}/agent-transfer
+%{_bindir}/openpgp2pem
+%{_bindir}/openpgp2spki
 %{_sbindir}/%{name}-authentication
 %{_sbindir}/%{name}-host
 
 %{_datadir}/%{name}/VERSION
-%{_datadir}/%{name}/checkperms
 %{_datadir}/%{name}/common
 %{_datadir}/%{name}/defaultenv
 %{_datadir}/%{name}/keytrans
@@ -90,6 +98,9 @@ exit 0
 
 
 %changelog
+* Sat Jan 30 2021 Akos Balla <akos.balla@sirc.hu> - 0.44-1
+- Create RPM package for 0.44
+
 * Tue May 03 2011 Bernie Innocenti <bernie@codewiz.org> - 0.35-2
 - Fix permissions on manpages
 - Remove BuildRoot
