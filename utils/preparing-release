@@ -1,0 +1,45 @@
+### Notes about preparing a release for the monkeysphere ###
+
+ * make sure that changelog and packaging/debian/changelog both have
+   reasonable version numbers.
+
+ * have the monkeysphere archive signing key handy!
+
+ * make tarball
+
+ * make releasenote
+
+ * commit outstanding changes.
+
+ * create upstream version tag: 
+
+    git tag -s -m 'Tagging Monkeysphere $whatever' monkeysphere_$whatever
+
+ * run commands from make debian-package by hand (?) so that it
+   doesn't trigger another tarball rebuild.  Make sure the package
+   passes lintian checks, installs, upgrades, removes reasonably, etc.
+
+ * debsign -k$GPGID *.changes
+
+ * create debian-specific version tag:
+
+    git tag -s -m 'Tagging Monkeysphere $whatever-1' monkeysphere_$whatever-1
+
+ * upload to monkeysphere repo:
+
+    cd repo && reprepro --ignore=wrongdistribution include experimental ../*.changes
+
+ * push git changes (including tags!)
+
+ * update FreeBSD and Macports info:
+
+    make freebsd-distinfo
+    make macports-portsfile
+
+   (probably should consider tagging these ports as well to make them
+   easy to recover)
+
+ * remember to add the new version (n + 1) to the bugtracker if it's
+   not already:
+
+     https://labs.riseup.net/code/projects/settings/monkeysphere
