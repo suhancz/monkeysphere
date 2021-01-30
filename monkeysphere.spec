@@ -99,10 +99,8 @@ exit 0
 
 %changelog
 * Sat Jan 30 2021 Akos Balla <akos.balla@sirc.hu> 0.45-1
-- new package built with tito
-
-* Sat Jan 30 2021 Akos Balla <akos.balla@sirc.hu> - 0.44-1
 - Create RPM package for 0.44
+- new package built with tito
 
 * Tue May 03 2011 Bernie Innocenti <bernie@codewiz.org> - 0.35-2
 - Fix permissions on manpages
