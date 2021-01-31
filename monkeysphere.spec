@@ -1,7 +1,7 @@
 Name: monkeysphere
 Summary: Use the OpenPGP web of trust to verify ssh connections
 Version: 0.29
-Release: 3
+Release: 4
 License: GPLv3+
 Group: Applications/Internet
 URL: http://web.monkeysphere.info/
@@ -59,10 +59,6 @@ test "$1" != 0 || groupdel %{name} &>/dev/null || :
 %{_sbindir}/monkeysphere-host
 %doc %dir %{_docdir}/monkeysphere
 %doc %{_docdir}/monkeysphere/Changelog
-%doc %{_docdir}/monkeysphere/MonkeySpec
-%doc %{_docdir}/monkeysphere/TODO
-%doc %{_docdir}/monkeysphere/getting-started-admin.mdwn
-%doc %{_docdir}/monkeysphere/getting-started-user.mdwn
 %doc %{_mandir}/man1/*
 %doc %{_mandir}/man7/*
 %doc %{_mandir}/man8/*
