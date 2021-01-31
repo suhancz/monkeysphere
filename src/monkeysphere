@@ -11,6 +11,14 @@
 # They are Copyright 2008-2009, and are all released under the GPL, version 3
 # or later.
 
+# monkeysphere: MonkeySphere client tool
+#
+# The monkeysphere scripts are written by:
+# Jameson Rollins <jrollins@fifthhorseman.net>
+#
+# They are Copyright 2008, and are all released under the GPL, version 3
+# or later.
+
 ########################################################################
 set -e
 
