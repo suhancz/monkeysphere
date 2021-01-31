@@ -6,7 +6,7 @@
 openpgp2ssh
 .Nd translate OpenPGP keys to SSH keys
 .Sh SYNOPSIS
-.Nm openpgp2ssh < mykey.gpg 
+.Nm openpgp2ssh < mykey.gpg
 .Pp
 .Nm gpg \-\-export $KEYID | openpgp2ssh $KEYID
 .Pp
@@ -55,10 +55,10 @@ before using this tool!
 .Nm gpg \-\-export\-secret\-key $KEYID | openpgp2ssh $KEYID | ssh\-add \-c /dev/stdin
 .Pp
 This pushes the secret key into the active
-.Xr ssh\-agent 1 . 
-Tools such as 
+.Xr ssh\-agent 1 .
+Tools such as
 .Xr ssh 1
-which know how to talk to the 
+which know how to talk to the
 .Xr ssh\-agent 1
 can now rely on the key.
 .Sh AUTHOR
