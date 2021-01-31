@@ -238,6 +238,7 @@ shift
 mkdir -p -m 0700 "$MS_HOME"
 mkdir -p "$hostKeysCacheDir"
 mkdir -p "$userKeysCacheDir"
+touch "$AUTHORIZED_USER_IDS"
 
 case $COMMAND in
     'update-known_hosts'|'update-known-hosts'|'k')
@@ -254,6 +255,15 @@ case $COMMAND in
 	else
 	    process_known_hosts
 	fi
+	;;
+
+    'update-userids'|'u')
+	if [ -z "$1" ] ; then
+	    failure "you must specify at least one userid."
+	fi
+	for userID ; do
+	    update_userid "$userID" "$userKeysCacheDir"
+	done
 	;;
 
     'update-authorized_keys'|'update-authorized-keys'|'a')
