@@ -21,6 +21,8 @@ expiration.  Monkeysphere is a framework that uses the OpenPGP web of
 trust for these PKI functions.  It can be used in both directions: for
 users to get validated host keys, and for hosts to authenticate users.
 
+%global debug_package %{nil}
+
 %prep
 %setup -q
 
