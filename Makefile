@@ -28,6 +28,9 @@ freebsd-distinfo:
 macports-portfile:
 	./utils/build-macports-portfile
 
+release: clean
+	tar c COPYING doc etc Makefile man src | gzip -n > ../monkeysphere_`head -n1 debian/changelog | sed 's/.*(\([^-]*\)-.*/\1/'`.orig.tar.gz
+
 clean:
 	# clean up old monkeysphere packages lying around as well.
 	rm -f monkeysphere_*
