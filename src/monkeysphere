@@ -217,7 +217,7 @@ mkdir -p -m 0700 "$GNUPGHOME"
 export LOG_LEVEL
 export LOG_PREFIX
 
-if [ "$#" -eq 0 ] ; then 
+if [ "$#" -eq 0 ] ; then
     usage
     failure "Please supply a subcommand."
 fi
