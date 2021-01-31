@@ -9,20 +9,20 @@ MONKEYSPHERE_VERSION = `head -n1 Changelog | sed 's/.*(\([^-]*\)).*/\1/'`
 
 # these defaults are for debian.  porters should probably adjust them
 # before calling make install
-ETCPREFIX ?= 
-ETCSUFFIX ?= 
+ETCPREFIX ?=
+ETCSUFFIX ?=
 PREFIX ?= /usr
 MANPREFIX ?= $(PREFIX)/share/man
 
 # nothing actually needs to be built now.
-all: 
+all:
 
 debian-package:
 	git buildpackage -uc -us
 
 # don't explicitly depend on the tarball, since our tarball
 # (re)generation is not idempotent even when no source changes.
-freebsd-distinfo: 
+freebsd-distinfo:
 	./utils/build-freebsd-distinfo
 
 macports-portfile:
