@@ -29,7 +29,18 @@ macports-portfile:
 	./utils/build-macports-portfile
 
 release: clean
-	tar c COPYING doc etc Makefile man src | gzip -n > ../monkeysphere_`head -n1 debian/changelog | sed 's/.*(\([^-]*\)-.*/\1/'`.orig.tar.gz
+	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
+	mkdir -p monkeysphere-$(MONKEYSPHERE_VERSION)/doc
+	ln -s ../../doc/README ../../doc/TODO ../../doc/MonkeySpec monkeysphere-$(MONKEYSPHERE_VERSION)/doc
+	ln -s ../COPYING ../etc ../Makefile ../man ../src  monkeysphere-$(MONKEYSPHERE_VERSION)
+	tar -ch monkeysphere-$(MONKEYSPHERE_VERSION) | gzip -n > monkeysphere_$(MONKEYSPHERE_VERSION).orig.tar.gz
+	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
+
+debian-package: release
+	tar xzf monkeysphere_$(MONKEYSPHERE_VERSION).orig.tar.gz
+	cp -a debian monkeysphere-$(MONKEYSPHERE_VERSION)
+	(cd monkeysphere-$(MONKEYSPHERE_VERSION) && debuild -uc -us)
+	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
 
 clean:
 	# clean up old monkeysphere packages lying around as well.
