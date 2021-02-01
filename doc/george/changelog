@@ -4,8 +4,19 @@
 *                                                                            *
 ******************************************************************************
 *  Please add new entries in reverse chronological order whenever you make   *
-*  changes to this system 					             *
+*  changes to this system (first command at top, last at bottom)             *
 ******************************************************************************
+2008-08-02 - jrollins
+	* aptitude update && aptitude dist-upgrade
+	* restarted cron, nullmailer, sshd
+	* aptitude install git-core ikiwiki
+	* adduser webmaster
+	* as webmaster, cloned jrollins git repo at ~webmaster/monkeysphere
+	* added post-commit hook to webmaster repo to update monkeysphere
+	ikiwiki at /srv/www.
+	* ran the post-commit script to generate pages, which are now
+	visible.
+
 2008-06-23 - dkg
 	* added monkeysphere apt repository to /etc/apt/sources.list
 	* added dkg's key to apt's list of trusted keys.
@@ -13,7 +24,7 @@
 	* upgraded to monkeysphere 0.2-1
 	* moved authorized_user_ids files into users' home directories.
 	* installed lockfile-progs
-	
+
 2008-06-22 - dkg
 	* installed screen (mjgoins and i were collaborating)
 
