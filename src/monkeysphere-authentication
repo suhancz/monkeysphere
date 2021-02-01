@@ -84,7 +84,7 @@ gpg_core() {
 gpg_sphere() {
     GNUPGHOME="$GNUPGHOME_SPHERE"
     export GNUPGHOME
- 
+
     su_monkeysphere_user "gpg --no-greeting --quiet --no-tty $@"
 }
 
@@ -149,7 +149,7 @@ export GNUPGHOME
 export CORE_KEYLENGTH
 export LOG_PREFIX
 
-if [ "$#" -eq 0 ] ; then 
+if [ "$#" -eq 0 ] ; then
     usage
     failure "Please supply a subcommand."
 fi
