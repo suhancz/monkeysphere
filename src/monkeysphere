@@ -44,6 +44,9 @@ umask 077
 # default return code
 RETURN=0
 
+# set the file creation mask to be only owner rw
+umask 077
+
 ########################################################################
 # FUNCTIONS
 ########################################################################
