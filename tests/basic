@@ -246,6 +246,7 @@ StrictModes no
 EOF
 fi
 
+export SSHD_PID=$!
 
 ######################################################################
 ### SERVER HOST SETUP
