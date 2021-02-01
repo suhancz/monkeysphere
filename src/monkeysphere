@@ -220,7 +220,7 @@ For more details, see:
 You might want to 'monkeysphere gen-subkey'"
     fi
 
-    workingdir=$(mktemp -d)
+    workingdir=$(mktemp -d ${TMPDIR:-/tmp}/tmp.XXXXXXXXXX)
     umask 077
     mkfifo "$workingdir/passphrase"
     keysuccess=1
