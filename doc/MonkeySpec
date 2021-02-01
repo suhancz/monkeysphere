@@ -43,7 +43,7 @@ server-side components
   - publish server gpg keys
   - give owner trust to keys for user authentication
 
-* "tamarin": concept - how to trigger or schedule rhesus at admin defined 
+* "tamarin": concept - how to trigger or schedule rhesus at admin defined
 	points (e.g. via cron or during ssh connections).
 
 client-side components
@@ -83,7 +83,7 @@ cronjob or an inotify hook, and invokes rhesus for the "bob" account.
 rhesus automatically takes each userid in bob's authorized_user_ids
 file, and looks on a keyserver to find all public keys associated with
 that user ID, with the goal of populating the authorized_keys file for
-bob@mangabey.  
+bob@mangabey.
 
 In particular: for each key found, the server evaluates the calculated
 validity of the specified user ID based on the ownertrust rules it has
@@ -123,31 +123,31 @@ NOTES
 * Daniel and Elliot lie. <check>
 * We will use a distributed VCS, each developer will create their own
   git repository and publish it publicly for others to pull from, mail
-  out 
+  out
 * public project page doesn't perhaps make sense yet
 * approximate goal - using the web of trust to authenticate ppl for
-  SSH 
+  SSH
 * outline of various components of monkeysphere
 * M: what does it mean to be in the monkeysphere?  not necessarily a
   great coder.
 * J: interested in seeing project happen, not in actually doing it.
-  anybody can contribute as much as they want. 
+  anybody can contribute as much as they want.
 * J: if we put the structure in place to work on monkeysphere then we
-  don't have to do anything 
-* D: we are not creating 
+  don't have to do anything
+* D: we are not creating
 * understand gpg's keyring better, understanding tools better,
-  building scripts 
+  building scripts
 * Some debian packages allow automated configuration of config files.
 
 * GENERAL GOAL - use openpgp web-of-trust to authenticate ppl for SSH
 * SPECIFIC GOAL - allow openssh to tie into pgp web-of-trust without
-  modifying either openpgp and openssh 
+  modifying either openpgp and openssh
 * DESIGN GOALS - authentication, use the existing generic OpenSSH
   client, the admin can make it default, although end-user should be
-  decide to use monkeysphere or not 
+  decide to use monkeysphere or not
 * DESIGN GOAL - use of monkeysphere should not radically change
-  connecting-to-server experience 
-* GOAL - pick a monkey-related name for each component 
+  connecting-to-server experience
+* GOAL - pick a monkey-related name for each component
 
 Host identity piece of monkeysphere could be used without buying into
 the authorization component.
