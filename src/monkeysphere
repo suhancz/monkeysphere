@@ -257,7 +257,9 @@ case $COMMAND in
 	    process_known_hosts
 	fi
 
-	log "known_hosts file updated."
+	    process_known_hosts
+	    ERR="$?"
+	fi
 	;;
 
     'update-authorized_keys'|'update-authorized-keys'|'a')
