@@ -39,6 +39,9 @@ tarball: clean
 debian-package:
 	debuild -uc -us
 
+freebsd-distinfo: tarball
+	./utils/build-freebsd-distinfo
+
 clean:
 	# clean up old monkeysphere packages lying around as well.
 	rm -f monkeysphere_*
