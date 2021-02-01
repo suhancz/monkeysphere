@@ -19,10 +19,12 @@ local uname
 local authorizedKeysDir
 local authorizedUserIDs
 
+update_users() {
+
 if [ "$1" ] ; then
     # get users from command line
     unames="$@"
-else	     
+else
     # or just look at all users if none specified
     unames=$(list_users)
 fi
@@ -110,7 +112,7 @@ for uname in $unames ; do
 		log verbose "adding raw authorized_keys file... "
 		cat "$rawAuthorizedKeys" >> "$AUTHORIZED_KEYS"
 	    else
-		log debug "not adding raw authorized_keys file."		
+		log debug "not adding raw authorized_keys file."
 	    fi
 	else
 	    log debug "empty or absent authorized_keys file."
@@ -134,7 +136,7 @@ for uname in $unames ; do
 	    chgrp $(id -g "$uname") "$AUTHORIZED_KEYS" && \
 	    chmod g+r "$AUTHORIZED_KEYS" && \
 	    mv -f "$AUTHORIZED_KEYS" "${authorizedKeysDir}/${uname}" || \
-	    { 
+	    {
 	    log error "Failed to install authorized_keys for '$uname'!"
 	    rm -f "${authorizedKeysDir}/${uname}"
 	    # indicate that there has been a failure:
