@@ -16,9 +16,9 @@
 
 
 cleanup() {
-    echo -n "removing temp gpg home... "
+    echo -n "removing temp gpg home... " 1>&2
     rm -rf $FOO
-    echo "done."
+    echo "done." 1>&2
 }
 
 trap cleanup EXIT
