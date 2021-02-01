@@ -42,7 +42,7 @@ unset GREP_OPTIONS
 umask 077
 
 # default return code
-ERR=0
+RETURN=0
 
 ########################################################################
 # FUNCTIONS
@@ -258,7 +258,7 @@ case $COMMAND in
 	fi
 
 	    process_known_hosts
-	    ERR="$?"
+	    RETURN="$?"
 	fi
 	;;
 
@@ -335,4 +335,4 @@ Try '$PGRM help' for usage."
         ;;
 esac
 
-exit "$ERR"
+exit "$RETURN"
