@@ -10,7 +10,7 @@
 
 VERSION=`head -n1 Changelog | sed 's/.*(\([^)]*\)).*/\1/'`
 
-{ 
+{
     sed "s/__VERSION__/$VERSION/g" < utils/releasenote.header
     head -n$(( $(grep -n '^ --' Changelog  | head -n1 | cut -f1 -d:) - 2 )) Changelog | tail -n+3
     sed "s/__VERSION__/$VERSION/g" < utils/releasenote.footer
@@ -29,7 +29,7 @@ checksums() {
     echo
     echo "SHA256:"
     sha256sum "monkeysphere_${VERSION%%-*}.orig.tar.gz"
-} 
+}
 
 checksums
 
