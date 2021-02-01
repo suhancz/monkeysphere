@@ -113,6 +113,8 @@ trap failed_cleanup EXIT
 ## setup trap
 trap failed_cleanup EXIT
 
+
+### SETUP VARIABLES
 ## set up some variables to ensure that we're operating strictly in
 ## the tests, not system-wide:
 
