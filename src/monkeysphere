@@ -367,6 +367,10 @@ case $COMMAND in
 	import_subkey "$@"
 	;;
 
+    'import-subkey'|'i')
+	import_key "$@"
+	;;
+
     'gen-subkey'|'g')
 	source "${MSHAREDIR}/gen_subkey"
 	gen_subkey "$@"
