@@ -118,6 +118,8 @@ trap failed_cleanup EXIT
 ######################################################################
 ### SETUP VARIABLES
 
+SSHD_PID=
+
 ## setup trap
 trap failed_cleanup EXIT
 
