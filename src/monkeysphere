@@ -177,13 +177,14 @@ check_gpg_authentication_subkey() {
 function subkey_to_ssh_agent() {
     # try to add all authentication subkeys to the agent:
 
-    local authsubkeys
-    local secretkeys
-    local subkey
-    local workingdir
-    local kname
     local sshaddresponse
+    local secretkeys
+    local authsubkeys
+    local workingdir
     local keysuccess
+    local subkey
+    local publine
+    local kname
 
     if ! test_gnu_dummy_s2k_extension ; then
 	failure "Your version of GnuTLS does not seem capable of using with gpg's exported subkeys.
@@ -207,7 +208,8 @@ For more details, see:
     fi
 
     # get list of secret keys (to work around https://bugs.g10code.com/gnupg/issue945):
-    secretkeys=$(gpg --list-secret-keys --with-colons --fixed-list-mode --fingerprint | grep '^fpr:' | cut -f10 -d: | awk '{ print "0x" $1 "!" }')
+    secretkeys=$(gpg --list-secret-keys --with-colons --fixed-list-mode --fingerprint | \
+	grep '^fpr:' | cut -f10 -d: | awk '{ print "0x" $1 "!" }')
 
     authsubkeys=$(gpg --list-secret-keys --with-colons --fixed-list-mode --fingerprint --fingerprint $secretkeys | cut -f1,5,10,12 -d: | grep -A1 '^ssb:[^:]*::[^:]*a[^:]*$' | grep '^fpr::' | cut -f3 -d: | sort -u)
 
@@ -243,7 +245,7 @@ You might want to 'monkeysphere gen-subkey'"
 		--export-secret-subkeys "0x${subkey}!" | openpgp2ssh "$subkey" > "$workingdir/$kname" &
 	    (cd "$workingdir" && DISPLAY=nosuchdisplay SSH_ASKPASS=/bin/false ssh-add "$@" "$kname" </dev/null )&
 
-	    passphrase_prompt "Enter passphrase for key for $primaryuid: " "$workingdir/passphrase"
+	    passphrase_prompt "Enter passphrase for key $kname: " "$workingdir/passphrase"
 	    wait %2
 	fi
 	keysuccess="$?"
