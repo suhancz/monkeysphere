@@ -28,7 +28,7 @@ freebsd-distinfo:
 macports-portfile:
 	./utils/build-macports-portfile
 
-release: clean
+tarball: clean
 	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
 	mkdir -p monkeysphere-$(MONKEYSPHERE_VERSION)/doc
 	ln -s ../../website/getting-started-user.mdwn ../../website/getting-started-admin.mdwn ../../doc/TODO ../../doc/MonkeySpec monkeysphere-$(MONKEYSPHERE_VERSION)/doc
