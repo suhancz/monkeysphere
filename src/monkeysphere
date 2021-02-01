@@ -257,28 +257,6 @@ case $COMMAND in
 	fi
 	;;
 
-    'update-userids'|'update-userid'|'u')
-	if [ -z "$1" ] ; then
-	    failure "you must specify at least one userid."
-	fi
-	for userID ; do
-	    update_userid "$userID" "$AUTHORIZED_USER_IDS"
-	done
-	log "Run the following to update your monkeysphere authorized_keys file:"
-	log "$PGRM update-authorized_keys"
-	;;
-
-    'remove-userids'|'remove-userid'|'r')
-	if [ -z "$1" ] ; then
-	    failure "you must specify at least one userid."
-	fi
-	for userID ; do
-	    remove_userid "$userID" "$AUTHORIZED_USER_IDS"
-	done
-	log "Run the following to update your monkeysphere authorized_keys file:"
-	log "$PGRM update-authorized_keys"
-	;;
-
     'update-authorized_keys'|'update-authorized-keys'|'a')
 	# whether or not to check keyservers
 	CHECK_KEYSERVER=${MONKEYSPHERE_CHECK_KEYSERVER:=${CHECK_KEYSERVER:="true"}}
