@@ -41,7 +41,7 @@ debian-package:
 
 # don't explicitly depend on the tarball, since our tarball
 # (re)generation is not idempotent even when no source changes.
-freebsd-distinfo: 
+freebsd-distinfo:
 	./utils/build-freebsd-distinfo
 
 clean:
