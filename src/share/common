@@ -52,7 +52,7 @@ log() {
 	return
     fi
 
-    for level in $alllevels ; do 
+    for level in $alllevels ; do
 	if [ "$LOG_LEVEL" = "$level" ] ; then
 	    found=true
 	fi
@@ -153,7 +153,7 @@ lock() {
 	fi
 	use_lockfileprogs=
     fi
-    
+
     case "$action" in
 	create)
 	    if [ -n "$use_lockfileprogs" ] ; then
@@ -163,7 +163,7 @@ lock() {
 	    fi
 	    log debug "lock created on '$file'."
 	    ;;
-	touch)	
+	touch)
 	    if [ -n "$use_lockfileprogs" ] ; then
 		lockfile-touch --oneshot "$file"
 	    else
@@ -196,7 +196,7 @@ advance_date() {
     local format="$3"
     local shortunits
 
-    # try things the GNU way first 
+    # try things the GNU way first
     if date -d "$number $longunits" "$format" &>/dev/null; then
 	date -d "$number $longunits" "$format"
     else
@@ -301,7 +301,7 @@ EOF
     elif ! test_gpg_expire "$keyExpire" ; then
 	failure "invalid key expiration value '$keyExpire'."
     fi
-	
+
     echo "$keyExpire"
 }
 
@@ -343,7 +343,7 @@ remove_line() {
     if grep -q -F "$string" "$file" 2>/dev/null ; then
 	tempfile=$(mktemp "${file}.XXXXXXX") || \
 	    failure "Unable to make temp file '${file}.XXXXXXX'"
-	
+
 	# remove the line with the string, and return 0
 	grep -v -F "$string" "$file" >"$tempfile"
 	cat "$tempfile" > "$file"
@@ -440,7 +440,7 @@ list_users() {
 # lines, each with a unique numeric port number that might be
 # associated with that service name.  (e.g. in: "https", out: "443")
 # if nothing is found, print nothing, and return 0.
-# 
+#
 # return 1 if there was an error in the search somehow
 get_port_for_service() {
 
@@ -475,7 +475,7 @@ get_primary_group() {
 # output the ssh key for a given key ID
 gpg2ssh() {
     local keyID
-    
+
     keyID="$1"
 
     gpg --export --no-armor "$keyID" | openpgp2ssh "$keyID" 2>/dev/null
@@ -507,7 +507,7 @@ ssh2known_hosts() {
 ssh2authorized_keys() {
     local userID
     local key
-    
+
     userID="$1"
     key="$2"
 
@@ -727,7 +727,7 @@ process_user_id() {
 		lastKey=sub
 		lastKeyOK=
 		fingerprint=
-		
+
 		# don't bother with sub keys if the primary key is not valid
 		if [ "$keyOK" != true ] ; then
 		    continue
@@ -737,7 +737,7 @@ process_user_id() {
 		if [ "$uidOK" != true ] ; then
 		    continue
 		fi
-		
+
 		# if sub key validity is not ok, skip
 		if [ "$validity" != 'u' -a "$validity" != 'f' ] ; then
 		    log debug "  - unacceptable sub key validity ($validity)."
@@ -1227,7 +1227,7 @@ get_cert_info() {
 check_cruft_file() {
     local loc="$1"
     local version="$2"
-    
+
     if [ -e "$loc" ] ; then
 	printf "! The file '%s' is no longer used by\n  monkeysphere (as of version %s), and can be removed.\n\n" "$loc" "$version" | log info
     fi
