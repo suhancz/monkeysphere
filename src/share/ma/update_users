@@ -21,6 +21,11 @@ local authorizedUserIDs
 
 update_users() {
 
+local unames
+local uname
+local authorizedKeysDir
+local authorizedUserIDs
+
 if [ "$1" ] ; then
     # get users from command line
     unames="$@"
