@@ -240,7 +240,6 @@ shift
 # make sure the user monkeysphere home directory exists
 mkdir -p -m 0700 "$MS_HOME"
 touch "$AUTHORIZED_USER_IDS"
-touch "$AUTHORIZED_KEYS"
 
 case $COMMAND in
     'update-known_hosts'|'update-known-hosts'|'k')
