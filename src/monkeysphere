@@ -35,6 +35,9 @@ export SYSSHAREDIR
 # sharedir for host functions
 MSHAREDIR="${SYSSHAREDIR}/m"
 
+# sharedir for host functions
+MSHAREDIR="${SYSSHAREDIR}/m"
+
 # UTC date in ISO 8601 format if needed
 DATE=$(date -u '+%FT%T')
 
@@ -369,6 +372,7 @@ case $COMMAND in
 	;;
 
     'import-subkey'|'i')
+	source "${MSHAREDIR}/import-key"
 	import_key "$@"
 	;;
 
