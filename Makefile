@@ -28,12 +28,12 @@ freebsd-distinfo:
 macports-portfile:
 	./utils/build-macports-portfile
 
-tarball: clean
+release: clean
 	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
 	mkdir -p monkeysphere-$(MONKEYSPHERE_VERSION)/doc
 	ln -s ../../website/getting-started-user.mdwn ../../website/getting-started-admin.mdwn ../../doc/TODO ../../doc/MonkeySpec monkeysphere-$(MONKEYSPHERE_VERSION)/doc
 	ln -s ../COPYING ../etc ../Makefile ../man ../src  monkeysphere-$(MONKEYSPHERE_VERSION)
-	tar -ch monkeysphere-$(MONKEYSPHERE_VERSION) | gzip -n > monkeysphere_$(MONKEYSPHERE_VERSION).tar.gz
+	tar -ch monkeysphere-$(MONKEYSPHERE_VERSION) | gzip -n > monkeysphere_$(MONKEYSPHERE_VERSION).orig.tar.gz
 	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
 
 debian-package:
