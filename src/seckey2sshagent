@@ -3,7 +3,7 @@
 # seckey2sshagent: this is a hack of a script to cope with the fact
 # that openpgp2ssh currently cannot support encrypted secret keys.
 
-# the basic operating principal is: 
+# the basic operating principal is:
 
 # export the secret key in encrypted format to a new keyring
 
@@ -23,13 +23,8 @@ cleanup() {
 
 trap cleanup EXIT
 
-GPGID="$1"
-
-idchars=$(echo $GPGID | wc -m)
-if [ "$idchars" -ne 17 ] ; then
-    echo "GPGID is not 16 characters ($idchars)."
-    exit 1
-fi
+#GPGID="$1"
+GPGID=$(echo "$1" | cut -c 25-)
 
 FOO=$(mktemp -d)
 
