@@ -41,6 +41,10 @@ unset GREP_OPTIONS
 # set the file creation mask to be only owner rw
 umask 077
 
+# default return code
+ERR=0
+export ERR
+
 ########################################################################
 # FUNCTIONS
 ########################################################################
@@ -330,3 +334,5 @@ case $COMMAND in
 Try '$PGRM help' for usage."
         ;;
 esac
+
+exit "$ERR"
