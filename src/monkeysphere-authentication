@@ -27,6 +27,9 @@ export SYSSHAREDIR
 SYSDATADIR=${MONKEYSPHERE_SYSDATADIR:-"/var/lib/monkeysphere"}
 export SYSDATADIR
 
+SYSDATADIR=${MONKEYSPHERE_SYSDATADIR:-"/var/lib/monkeysphere"}
+export SYSDATADIR
+
 # sharedir for authentication functions
 MASHAREDIR="${SYSSHAREDIR}/ma"
 
