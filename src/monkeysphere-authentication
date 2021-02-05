@@ -107,8 +107,18 @@ gpg_core_sphere_sig_transfer() {
 	gpg_sphere "--import-options import-local-sigs --import" 2>&1 | log debug
 }
 
+# load the core fingerprint into the fingerprint variable, using the
+# gpg host secret key
+core_fingerprint() {
+    log debug "determining core key fingerprint..."
+    gpg_core --quiet --list-secret-key \
+	--with-colons --fixed-list-mode --with-fingerprint \
+	| grep ^fpr: | cut -d: -f10
+}
+
 # export signatures from core to sphere
 gpg_core_sphere_sig_transfer() {
+    log debug "exporting core local sigs to sphere..."
     gpg_core --export-options export-local-sigs --export | \
 	gpg_sphere --import-options import-local-sigs --import
 }
