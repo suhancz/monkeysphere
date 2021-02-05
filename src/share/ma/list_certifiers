@@ -86,4 +86,5 @@ gpg_sphere "--fingerprint --with-colons --fixed-list-mode --check-sigs" | \
     esac
 done
 
+
 }
