@@ -2,10 +2,10 @@
 
 # Tests to ensure that the monkeysphere is working
 
-# Authors: 
+# Authors:
 #   Daniel Kahn Gillmor <dkg@fifthhorseman.net>
 #   Jameson Rollins <jrollins@fifthhorseman.net>
-#   Micah Anderson <micah@riseup.net> 
+#   Micah Anderson <micah@riseup.net>
 #
 # Copyright: 2008-2009
 # License: GPL v3 or later
@@ -22,11 +22,11 @@ export TESTDIR=$(cd $(dirname "$0") && pwd)
 
 source "$TESTDIR"/common
 
-perl -MCrypt::OpenSSL::RSA -e 1 2>/dev/null || { echo "You must have the perl module Crypt::OpenSSL::RSA installed to run this test.  
+perl -MCrypt::OpenSSL::RSA -e 1 2>/dev/null || { echo "You must have the perl module Crypt::OpenSSL::RSA installed to run this test.
 On debian-derived systems, you can set this up with:
   apt-get install libcrypt-openssl-rsa-perl" ; exit 1; }
 
-perl -MDigest::SHA -e 1 2>/dev/null || { echo "You must have the perl module Digest::SHA installed to run this test.  
+perl -MDigest::SHA -e 1 2>/dev/null || { echo "You must have the perl module Digest::SHA installed to run this test.
 On debian-derived systems, you can set this up with:
   apt-get install libdigest-sha1-perl" ; exit 1; }
 
@@ -174,7 +174,7 @@ PEM2OPENPGP_TIMESTAMP="$(( $timestamp + 1 ))" pem2openpgp fubar \
 NEWKEYFPR=$(< "$TEMPDIR"/newkey.gpg keytrans listfprs)
 NEWKEYID=$( printf "%s" "$NEWKEYFPR" | cut -b25-40)
 
-< "$TEMPDIR"/newkey.gpg gpg --import 
+< "$TEMPDIR"/newkey.gpg gpg --import
 
 < "$TEMPDIR"/secring.gpg \
 PEM2OPENPGP_TIMESTAMP="$timestamp" \
