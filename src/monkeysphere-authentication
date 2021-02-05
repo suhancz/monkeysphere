@@ -107,6 +107,12 @@ gpg_core_sphere_sig_transfer() {
 	gpg_sphere "--import-options import-local-sigs --import" 2>&1 | log debug
 }
 
+# export signatures from core to sphere
+gpg_core_sphere_sig_transfer() {
+    gpg_core --export-options export-local-sigs --export | \
+	gpg_sphere --import-options import-local-sigs --import
+}
+
 ########################################################################
 # MAIN
 ########################################################################
