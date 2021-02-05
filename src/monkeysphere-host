@@ -147,7 +147,7 @@ find_host_userid() {
 # show info about the host key
 show_key() {
     gpg_host --fingerprint --list-key --list-options show-unusable-uids \
-	"0x${HOST_FINGERPRINT}!" 2>/dev/null
+	"0x${HOST_FINGERPRINT}!" 2>/dev/null || true
     # FIXME: make sure expiration date is shown
 
     echo "OpenPGP fingerprint: $HOST_FINGERPRINT"
@@ -260,7 +260,7 @@ case $COMMAND in
 usage: $PGRM expert <subcommand> [options] [args]
 
 expert subcommands:
- import-key (i) [NAME[:PORT]]        import existing ssh key to gpg
+ import-key (i) FILE [NAME[:PORT]]   import existing ssh key to gpg
  gen-key (g) [NAME[:PORT]]           generate gpg key for the host
    --length (-l) BITS                  key length in bits (2048)
  diagnostics (d)                     monkeysphere host status
