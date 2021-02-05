@@ -57,7 +57,7 @@ fi
 monkeysphere-authentication setup
 
 # before 0.23, the old gnupg-host data directory used to contain the
-# trust core and the system's ssh host key.  
+# trust core and the system's ssh host key.
 
 if [ -d "$SYSDATADIR"/gnupg-host ] ; then
 
@@ -74,11 +74,11 @@ if [ -d "$SYSDATADIR"/gnupg-host ] ; then
 	for authgrip in $(GNUPGHOME="$SYSDATADIR"/gnupg-host gpg --quiet --no-tty --no-permission-warning --export-ownertrust | \
 	    grep ':6:$' | \
 	    sed -r 's/^[A-F0-9]{24}([A-F0-9]{16}):6:$/\1/') ; do
-	    
+
 	# we're assuming that old id certifiers were only added by old
 	# versions of m-s c+, which added certifiers by ltsigning
 	# entire keys.
-	    
+
 	# so we'll walk the list of tsigs from the old host key, and
 	# add those keys as certifiers to the new system.
 
@@ -86,7 +86,7 @@ if [ -d "$SYSDATADIR"/gnupg-host ] ; then
 	    # multiple times for the same $foo, we'll only transfer
 	    # one of those certifications (even if later
 	    # certifications had different parameters).
-	    
+
 	    GNUPGHOME="$SYSDATADIR"/gnupg-host gpg --quiet --no-tty --no-permission-warning --fingerprint --with-colons --fixed-list-mode --check-sigs | \
 		cut -f 1,2,5,8,9,10 -d: | \
 		egrep '^(fpr:::::|sig:!:'"$authgrip"':[[:digit:]]+ [[:digit:]]+:)' | \
@@ -144,20 +144,20 @@ if [ -d "$SYSDATADIR"/gnupg-host ] ; then
     fi
 
 ### transfer host key information (if present) into the new spot
-    
+
     if [ -d "${MHDATADIR}" ] ; then
 	log "Not transferring host key info because host directory already exists.\n"
     else
 	if [ -s "$SYSDATADIR"/ssh_host_rsa_key ] || \
 	    GNUPGHOME="$SYSDATADIR"/gnupg-host gpg --quiet --no-tty --no-permission-warning --with-colons --list-secret-keys | grep -q '^sec:' ; then
-	    
+
 	    FPR=$(GNUPGHOME="$SYSDATADIR"/gnupg-host gpg --quiet --no-tty --no-permission-warning --with-colons --fixed-list-mode --list-secret-keys --fingerprint | awk -F: '/^fpr:/{ print $10 }' )
-	    
+
 	# create host home
 	    mkdir -p $(dirname "$MHDATADIR")
 	    NEWDATADIR=$(mktemp -d "${MHDATADIR}.XXXXXX")
 	    chmod 0700 "${NEWDATADIR}"
-	    
+
 	    log "importing host key from old monkeysphere installation\n"
 
 # export from the pubring as well as the that new (non-expired)
@@ -167,7 +167,7 @@ if [ -d "$SYSDATADIR"/gnupg-host ] ; then
 
 # FIXME: if all self-sigs are expired, then the secret key import may
 # fail anyway. How should we deal with that?
-	    
+
 	    if (GNUPGHOME="$SYSDATADIR"/gnupg-host gpg --quiet --no-tty --no-permission-warning --export-secret-keys && \
 		GNUPGHOME="$SYSDATADIR"/gnupg-host gpg --quiet --no-tty --no-permission-warning --export "$FPR") | \
 		GNUPGHOME="$NEWDATADIR" gpg --quiet --no-tty --import ; then
@@ -178,7 +178,7 @@ if [ -d "$SYSDATADIR"/gnupg-host ] ; then
 		    exit 1
 		fi
 	    fi
-		
+
 	    # if we get here cleanly, then we're OK to move forward:
 	    mv "$NEWDATADIR" "$MHDATADIR"
 
