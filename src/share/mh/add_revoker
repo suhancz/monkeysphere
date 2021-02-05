@@ -131,4 +131,13 @@ fi
 trap - EXIT
 rm -rf "$tmpDir"
 
+# core ltsigns the newly imported revoker key
+if echo "$addrevokerCommand" | \
+    gpg_core_edit ; then
+
+    log info -e "\nRevoker added."
+else
+    failure "Problem adding revoker."
+fi
+
 }
