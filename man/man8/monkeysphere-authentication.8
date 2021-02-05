@@ -68,6 +68,21 @@ may be used in place of `list\-id\-certifiers'.
 Show the monkeysphere version number.  `v' may be used in place of
 `version'.
 .TP
+.B help
+Output a brief usage summary.  `h' or `?' may be used in place of
+`help'.
+.TP
+.B version
+show version number
+
+Other commands:
+.TP
+.B setup
+Setup the server for Monkeysphere user authentication.  This command
+is idempotent and run automatically by the other commands, and should
+therefore not usually need to be run manually.  `s' may be used in
+place of `setup'.
+.TP
 .B diagnostics
 Review the state of the server with respect to authentication.  `d'
 may be used in place of `diagnostics'.
