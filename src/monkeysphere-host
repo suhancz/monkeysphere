@@ -32,6 +32,10 @@ MHSHAREDIR="${SYSSHAREDIR}/mh"
 # datadir for host functions
 MHDATADIR="${SYSDATADIR}/host"
 
+# host pub key files
+HOST_KEY_PUB="${SYSDATADIR}/ssh_host_rsa_key.pub"
+HOST_KEY_PUB_GPG="${SYSDATADIR}/ssh_host_rsa_key.pub.gpg"
+
 # UTC date in ISO 8601 format if needed
 DATE=$(date -u '+%FT%T')
 
@@ -97,14 +101,23 @@ check_user() {
     is_root || failure "You must be root to run this command."
 }
 
-# output just key fingerprint
-# FIXME: should not have to be priviledged user to get host
-# fingerprint.  should be taken from publicly accessible key files,
-# instead of the keyring.
-get_host_fingerprint() {
-    gpg_host --list-secret-keys --fingerprint \
-	--with-colons --fixed-list-mode 2> /dev/null | \
-	grep '^fpr:' | head -1 | cut -d: -f10 2>/dev/null || true
+# output host key ssh fingerprint
+load_ssh_fingerprint() {
+    [ -f "$HOST_KEY_PUB" ] || return 0
+    HOST_FINGERPRINT_SSH=$(ssh-keygen -l -f "$HOST_KEY_PUB" \
+	| awk '{ print $1, $2, $4 }')
+}
+
+# fail if host key present
+check_host_key() {
+    [ -z "$HOST_FINGERPRINT" ] \
+	|| failure "An OpenPGP host key already exists."
+}
+
+# fail if host key not present
+check_host_no_key() {
+    [ "$HOST_FINGERPRINT" ] \
+	|| failure "You don't appear to have a Monkeysphere host key on this server.  Please run 'monkeysphere-host expert import-key' first."
 }
 
 # output the index of a user ID on the host key
@@ -131,27 +144,18 @@ find_host_userid() {
     fi
 }
 
-# function to check for host secret key
-check_host_fail() {
-    [ "$HOST_FINGERPRINT" ] || \
-	failure "You don't appear to have a Monkeysphere host key on this server.  Please run 'monkeysphere-host expert import-key' first."
-}
-
 # show info about the host key
 show_key() {
-    local fingerprintSSH
-
     gpg_host --fingerprint --list-key --list-options show-unusable-uids \
 	"0x${HOST_FINGERPRINT}!" 2>/dev/null
     # FIXME: make sure expiration date is shown
 
     echo "OpenPGP fingerprint: $HOST_FINGERPRINT"
 
-    if [ -f "$HOST_KEY_PUB" ] ; then
-	fingerprintSSH=$(ssh-keygen -l -f "$HOST_KEY_PUB" | \
-	    awk '{ print $1, $2, $4 }')
+    load_ssh_fingerprint
 
-	echo "ssh fingerprint: $fingerprintSSH"
+    if [ "$HOST_FINGERPRINT_SSH" ] ; then
+	echo "ssh fingerprint: $HOST_FINGERPRINT_SSH"
     else
 	log error "SSH host key not found."
     fi
@@ -182,13 +186,6 @@ MONKEYSPHERE_USER=${MONKEYSPHERE_MONKEYSPHERE_USER:=${MONKEYSPHERE_USER:="monkey
 CHECK_KEYSERVER=${MONKEYSPHERE_CHECK_KEYSERVER:="true"}
 GNUPGHOME_HOST=${MONKEYSPHERE_GNUPGHOME_HOST:="${MHDATADIR}"}
 
-# host key fingerprint
-HOST_FINGERPRINT=$(get_host_fingerprint)
-
-# host pub key files
-HOST_KEY_PUB="${SYSDATADIR}/ssh_host_rsa_key.pub"
-HOST_KEY_PUB_GPG="${SYSDATADIR}/ssh_host_rsa_key.pub.gpg"
-
 # export variables needed in su invocation
 export DATE
 export MODE
@@ -197,17 +194,18 @@ export MONKEYSPHERE_USER
 export KEYSERVER
 export GNUPGHOME_HOST
 export GNUPGHOME
-export HOST_FINGERPRINT
+export HOST_FINGERPRINT=
+export HOST_FINGERPRINT_SSH=
 
 # get subcommand
 COMMAND="$1"
 [ "$COMMAND" ] || failure "Type '$PGRM help' for usage."
 shift
 
-
 case $COMMAND in
     'show-key'|'show'|'s')
-	check_host_fail
+	load_fingerprint
+	check_host_no_key
 	show_key
 	;;
 
@@ -271,11 +269,15 @@ EOF
 		;;
 
 	    'import-key'|'i')
+		load_fingerprint
+		check_host_key
 		source "${MHSHAREDIR}/import_key"
 		import_key "$@"
 		;;
 
 	    'gen-key'|'g')
+		load_fingerprint
+		check_host_key
 		source "${MHSHAREDIR}/gen_key"
 		gen_key "$@"
 		;;
