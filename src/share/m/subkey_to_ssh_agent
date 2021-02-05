@@ -55,7 +55,7 @@ subkey_to_ssh_agent() {
 	    failure "You have no secret keys in your keyring!
 You might want to run 'gpg --gen-key'."
 	fi
-    
+
 	authsubkeys=$(gpg_user --list-secret-keys --with-colons --fixed-list-mode \
 	    --fingerprint --fingerprint $secretkeys | \
 	    cut -f1,5,10,12 -d: | grep -A1 '^ssb:[^:]*::[^:]*a[^:]*$' | \
@@ -74,7 +74,7 @@ You might want to run 'monkeysphere gen-subkey'."
 
     # FIXME: we're currently allowing any other options to get passed
     # through to ssh-add.  should we limit it to known ones?  For
-    # example: -d or -c and/or -t <lifetime> 
+    # example: -d or -c and/or -t <lifetime>
 
     for subkey in $authsubkeys; do
 	# test that the subkey has proper capability

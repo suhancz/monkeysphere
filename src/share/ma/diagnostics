@@ -45,7 +45,7 @@ if ! [ -d "$MADATADIR" ] ; then
     echo "! No authentication data directory found."
     echo " - Recommendation: run 'monkeysphere-authentication setup'"
     exit
-fi    
+fi
 
 # FIXME: what's the correct, cross-platform way to determine where
 # sshd_config lives?
@@ -90,7 +90,7 @@ else
 	echo " - Recommendation: Check clock ($(date +%F_%T)); use NTP?"
 	problemsfound=$(($problemsfound+1))
     fi
-	    
+
 fi
 
 # FIXME: look at the ownership/privileges of the various keyrings,
@@ -105,8 +105,8 @@ echo
 echo "Checking for Identity Certifiers..."
 if ! ( monkeysphere-authentication list-identity-certifiers | egrep '^[A-F0-9]{40}:' >/dev/null ) ; then
     echo "! No Identity Certifiers found!"
-    echo " - Recommendation: once you know who should be able to certify the identities of 
-     connecting users, you should add their key, with: 
+    echo " - Recommendation: once you know who should be able to certify the identities of
+     connecting users, you should add their key, with:
       monkeysphere-authentication add-identity-certifier"
     problemsfound=$(($problemsfound+1))
 fi

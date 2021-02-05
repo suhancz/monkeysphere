@@ -36,12 +36,12 @@ your host key!
 EOF
 	printf "Publish the certificate after generation? (y/n/Q) " >&2
 	read publish
-	
+
 	if ! [ "${publish/y/Y}" = 'Y' -o "${publish/n/N}" = 'N' ] ; then
 	    failure "aborting at user request"
 	fi
     fi
-    
+
     # our current implementation is very simple: we just want to
     # generate the revocation certificate on stdout.  This provides
     # for the two most likely (but hopefully not common) scenarios:
