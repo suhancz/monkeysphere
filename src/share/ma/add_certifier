@@ -36,8 +36,6 @@ local fingerprint
 local ltsignCommand
 local trustval
 
-PROMPT=true
-
 # get options
 while true ; do
     case "$1" in

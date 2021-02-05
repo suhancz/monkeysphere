@@ -164,7 +164,6 @@ LOG_PREFIX=${MONKEYSPHERE_LOG_PREFIX:='ms: '}
 # export variables needed in su invocation
 export DATE
 export LOG_LEVEL
-export MONKEYSPHERE_USER
 export KEYSERVER
 export MONKEYSPHERE_USER
 export MONKEYSPHERE_GROUP
