@@ -14,6 +14,9 @@
 ########################################################################
 set -e
 
+# set the pipefail option so pipelines fail on first command failure
+set -o pipefail
+
 PGRM=$(basename $0)
 
 SYSSHAREDIR=${MONKEYSPHERE_SYSSHAREDIR:-"/usr/share/monkeysphere"}
@@ -109,9 +112,6 @@ check_user() {
 
 # output just key fingerprint
 fingerprint_host_key() {
-    # set the pipefail option so functions fails if can't read sec key
-    set -o pipefail
-
     gpg_host --list-secret-keys --fingerprint \
 	--with-colons --fixed-list-mode 2> /dev/null | \
 	grep '^fpr:' | head -1 | cut -d: -f10 2>/dev/null
@@ -160,12 +160,13 @@ show_key() {
 
     echo "OpenPGP fingerprint: $HOST_FINGERPRINT"
 
-    if [ -f "${MHDATADIR}/ssh_host_rsa_key.pub" ] ; then
-	fingerprintSSH=$(ssh-keygen -l -f "${MHDATADIR}/ssh_host_rsa_key.pub" | \
+    if [ -f "$HOST_KEY_PUB" ] ; then
+	fingerprintSSH=$(ssh-keygen -l -f "$HOST_KEY_PUB" | \
 	    awk '{ print $1, $2, $4 }')
+
 	echo "ssh fingerprint: $fingerprintSSH"
     else
-	log info "SSH host key not found."
+	log error "SSH host key not found."
     fi
 
     # FIXME: show expiration date
@@ -198,6 +199,10 @@ GNUPGHOME_HOST=${MONKEYSPHERE_GNUPGHOME_HOST:="${MHDATADIR}"}
 # host key fingerprint
 HOST_FINGERPRINT=$(fingerprint_host_key)
 
+# host pub key files
+HOST_KEY_PUB="${SYSDATADIR}/ssh_host_rsa_key.pub"
+HOST_KEY_PUB_GPG="${SYSDATADIR}/ssh_host_rsa_key.pub.gpg"
+
 # export variables needed in su invocation
 export DATE
 export MODE
@@ -216,7 +221,7 @@ shift
 
 case $COMMAND in
     'show-key'|'show'|'s')
-	check_host_keyring
+	check_host_fail
 	show_key
 	;;
 
