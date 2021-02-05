@@ -352,7 +352,7 @@ gpgadmin --armor --export "$SSHHOSTKEYID" | gpg --import
 echo
 echo "##################################################"
 echo "### export testuser key to server..."
-gpg --export testuser | monkeysphere-authentication gpg-cmd --import
+gpg --export testuser | monkeysphere-authentication expert gpg-cmd --import
 
 # update authorized_keys for user
 echo
