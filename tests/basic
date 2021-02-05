@@ -51,6 +51,9 @@ which socat >/dev/null || { echo "You must have socat installed to run this test
 
 ## FIXME: other checks?
 
+######################################################################
+### FUNCTIONS
+
 # gpg command for test admin user
 gpgadmin() {
     chmod 0700 "$TEMPDIR"/admin "$TEMPDIR"/admin/.gnupg
@@ -124,7 +127,9 @@ SSHD_PID=
 trap failed_cleanup EXIT
 
 
+######################################################################
 ### SETUP VARIABLES
+
 ## set up some variables to ensure that we're operating strictly in
 ## the tests, not system-wide:
 
@@ -290,6 +295,8 @@ echo "##################################################"
 echo "### certifying server host key..."
 < "$HOST_KEY_FILE" gpgadmin --import
 echo y | gpgadmin --command-fd 0 --sign-key "$SSHHOSTKEYID"
+
+# FIXME: add revoker?
 
 # FIXME: add revoker?
 
@@ -596,6 +603,9 @@ echo
 echo "##################################################"
 echo "### ssh connection test for failure..."
 ssh_test 255
+
+
+######################################################################
 
 
 ######################################################################
