@@ -46,7 +46,7 @@ uses the value from PEM2OPENPGP_TIMESTAMP.
 valid OpenPGP usage flags (see section 5.2.3.21 of RFC 4880 for what
 these mean).  The available choices are: certify, sign, encrypt_comms,
 encrypt_storage, encrypt (this means both encrypt_comms and
-encrypt_storage), authenticate, split, shared.  By default, 
+encrypt_storage), authenticate, split, shared.  By default,
 .Nm
 only sets the certify flag.
 .Pp
@@ -61,7 +61,7 @@ default, no expiration subpacket is included.
 should ignore stdin, and instead generate a new key internally and
 build the certificate based on this new key.  Set this variable to the
 number of bits for the new key (e.g. 2048).  By default (when this is
-unset), 
+unset),
 .Nm
 will read the key from stdin.
 .Sh AUTHOR
