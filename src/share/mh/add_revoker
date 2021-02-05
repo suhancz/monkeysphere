@@ -135,7 +135,7 @@ rm -rf "$tmpDir"
 if echo "$addrevokerCommand" | \
     gpg_core_edit ; then
 
-    log info -e "\nRevoker added."
+    log info "Revoker added."
 else
     failure "Problem adding revoker."
 fi
