@@ -80,8 +80,6 @@ ssh_test() {
 	sleep 1
     done
 
-    set +e
-
     # make a client connection to the socket
     echo "##### starting ssh client..."
     ssh-agent bash -c \
