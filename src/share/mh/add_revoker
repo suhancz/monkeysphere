@@ -109,7 +109,7 @@ EOF
 
     # get the full fingerprint of new revoker key
     log debug "getting fingerprint of revoker key..."
-    fingerprint=$(su_monkeysphere_user "GNUPGHOME=$tmpDir gpg --list-key --with-colons --with-fingerprint 0x${keyID}!" \
+    fingerprint=$(su_monkeysphere_user "GNUPGHOME=$tmpDir gpg --list-key --with-colons --with-fingerprint ${revokerKeyID}" \
 	| grep '^fpr:' | cut -d: -f10)
 
     # test that there is only a single fingerprint
@@ -122,11 +122,11 @@ EOF
 	failure
     fi
 
-    log info "key found:"
+    log info "revoker key found:"
     su_monkeysphere_user "GNUPGHOME=$tmpDir gpg --fingerprint 0x${fingerprint}!"
 
     if [ "$PROMPT" = "true" ] ; then
-	printf "Are you sure you want to add the above key as a revoker\nof the host key? (Y/n) " >&2
+	printf "Are you sure you want to add the above key as a revoker\nof the key '$keyID'? (Y/n) " >&2
 	read OK; OK=${OK:-Y}
 	if [ "${OK/y/Y}" != 'Y' ] ; then
 	    failure "revoker not added."

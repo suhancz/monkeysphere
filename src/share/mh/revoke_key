@@ -46,9 +46,8 @@ EOF
 	publish=N
     else
 	cat <<EOF >&2
-This will generate a revocation certificate for your host key
-(fingerprint: $HOST_FINGERPRINT) and
-dump the certificate to standard output.
+This will generate a revocation certificate for key $keyID
+and dump the certificate to standard output.
 
 It can also directly publish the new revocation certificate
 to the public keyservers via $KEYSERVER if you want it to.
