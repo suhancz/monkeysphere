@@ -174,18 +174,21 @@ EOF
 Run the following command for more info about the found keys:
 gpg --check-sigs --list-options show-uid-validity =${userID}
 EOF
-
-	    # FIXME: should we do anything extra here if the retrieved
-	    # host key is actually in the known_hosts file and the ssh
-	    # connection will succeed?  Should the user be warned?
-	    # prompted?
+	else
+	    log info <<EOF
+There may be other keys with less than marginal validity for this hostname.
+EOF
 	fi
 
-    # if host key could not be retrieved from the host, output message
-    else
 	log info <<EOF
-Could not retrieve RSA host key from $HOST.
+Run the following command for more info about the found keys:
+gpg --check-sigs --list-options show-uid-validity =${userID}
 EOF
+
+	# FIXME: should we do anything extra here if the retrieved
+	# host key is actually in the known_hosts file and the ssh
+	# connection will succeed?  Should the user be warned?
+	# prompted?
     fi
 
     # output footer
