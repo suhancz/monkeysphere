@@ -329,9 +329,6 @@ if [ "$#" -eq 0 ] ; then
     failure "Please supply a subcommand."
 fi
 
-# explicitly set the FILE_OWNER variable, for checking file permissions
-export FILE_OWNER=$(whoami)
-
 # get subcommand
 COMMAND="$1"
 shift
