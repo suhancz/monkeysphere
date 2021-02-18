@@ -290,8 +290,8 @@ echo "$SSHHOSTKEYID"
 echo
 echo "##################################################"
 echo "### getting host key fingerprint..."
-HOSTKEYID=$( monkeysphere-host show-key | grep '^OpenPGP fingerprint: ' | cut -f3 -d\  )
-echo "$HOSTKEYID"
+SSHHOSTKEYID=$( monkeysphere-host show-key | grep '^OpenPGP fingerprint: ' | cut -f3 -d\  )
+echo "$SSHHOSTKEYID"
 
 # change host key expiration
 echo
