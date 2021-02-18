@@ -109,11 +109,11 @@ EOF
 
     # get the full fingerprint of new revoker key
     log debug "getting fingerprint of revoker key..."
-    fingerprint=$(su_monkeysphere_user "gpg --list-key --with-colons --with-fingerprint 0x${keyID}!" \
+    fingerprint=$(su_monkeysphere_user "GNUPGHOME=$tmpDir gpg --list-key --with-colons --with-fingerprint 0x${keyID}!" \
 	| grep '^fpr:' | grep "$keyID" | cut -d: -f10)
 
     log info "key found:"
-    su_monkeysphere_user "gpg --fingerprint 0x${fingerprint}!"
+    su_monkeysphere_user "GNUPGHOME=$tmpDir gpg --fingerprint 0x${fingerprint}!"
 
     if [ "$PROMPT" = "true" ] ; then
 	echo "Are you sure you want to add the above key as a"
