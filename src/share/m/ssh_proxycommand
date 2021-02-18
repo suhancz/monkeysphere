@@ -176,10 +176,9 @@ gpg --check-sigs --list-options show-uid-validity =${userID}
 EOF
 	else
 	    log info <<EOF
-There may be other keys with less than marginal validity for this hostname.
+There may be keys for this hostname with less than marginal validity.
 EOF
 	fi
-
 	log info <<EOF
 Run the following command for more info about the found keys:
 gpg --check-sigs --list-options show-uid-validity =${userID}
