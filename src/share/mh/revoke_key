@@ -42,6 +42,28 @@ EOF
 	fi
     fi
 
+    if [ "$PROMPT" = "false" ] ; then
+	publish=N
+    else
+	cat <<EOF >&2
+This will generate a revocation certificate for your host key
+(fingerprint: $HOST_FINGERPRINT) and
+dump the certificate to standard output.
+
+It can also directly publish the new revocation certificate
+to the public keyservers via $KEYSERVER if you want it to.
+
+Publishing this certificate will IMMEDIATELY and PERMANENTLY revoke
+your host key!
+
+EOF
+	read -p "Publish the certificate after generation? (y/n/Q) " publish
+
+	if ! [ "${publish/y/Y}" = 'Y' -o "${publish/n/N}" = 'N' ] ; then
+	    failure "aborting at user request"
+	fi
+    fi
+
     # our current implementation is very simple: we just want to
     # generate the revocation certificate on stdout.  This provides
     # for the two most likely (but hopefully not common) scenarios:
