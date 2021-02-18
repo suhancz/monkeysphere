@@ -183,7 +183,7 @@ EOF
 
     # if host key could not be retrieved from the host, output message
     else
-	cat <<EOF | log info
+	log info <<EOF
 Could not retrieve RSA host key from $HOST.
 EOF
     fi
