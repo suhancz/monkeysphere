@@ -30,4 +30,3 @@ MONKEYSPHERE_USER="monkeysphere"
 
 # default about whether or not to prompt
 PROMPT="true"
-
