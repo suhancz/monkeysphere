@@ -84,7 +84,7 @@ ssh_test() {
 
     # wait until the socket is created before continuing
     while [ ! -S "$SOCKET" ] ; do
-	sleep 1
+	sleep 2
     done
 
     # make a client connection to the socket
