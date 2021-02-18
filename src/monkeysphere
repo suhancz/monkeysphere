@@ -329,6 +329,9 @@ if [ "$#" -eq 0 ] ; then
     failure "Please supply a subcommand."
 fi
 
+# explicitly set the USER variable, for checking file permissions
+export USER=$(whoami)
+
 # get subcommand
 COMMAND="$1"
 shift
