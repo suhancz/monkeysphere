@@ -116,7 +116,7 @@ EOF
     if (( $(echo "$fingerprint" | wc -l) != 1 )) ; then
 	cat <<EOF
 More than one fingerprint found:
-  echo $fingerprint
+$fingerprint
 Please use a more specific key ID.
 EOF
 	failure
