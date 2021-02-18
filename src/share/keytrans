@@ -1131,7 +1131,7 @@ for (basename($0)) {
 	my $instream;
 	open($instream,'-');
 	binmode($instream, ":bytes");
-	my $newuid = adduserid($instream, $fpr, $uid, 
+	my $newuid = adduserid($instream, $fpr, $uid,
 			       { sig_timestamp => $ENV{PEM2OPENPGP_TIMESTAMP},
 				 expiration => $ENV{PEM2OPENPGP_EXPIRATION},
 				 usage_flags => $ENV{PEM2OPENPGP_USAGE_FLAGS},
@@ -1153,4 +1153,3 @@ for (basename($0)) {
     die "Unrecognized keytrans call.\n";
   }
 }
-
