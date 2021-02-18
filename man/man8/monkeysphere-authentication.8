@@ -78,16 +78,16 @@ show version number
 Other commands:
 .TP
 .B setup
-Setup the server for Monkeysphere user authentication.  This command
-is idempotent and run automatically by the other commands, and should
-therefore not usually need to be run manually.  `s' may be used in
-place of `setup'.
+Setup the server in preparation for Monkeysphere user authentication.
+This command is idempotent and run automatically by the other
+commands, and should therefore not usually need to be run manually.
+`s' may be used in place of `setup'.
 .TP
 .B diagnostics
 Review the state of the server with respect to authentication.  `d'
 may be used in place of `diagnostics'.
 .TP
-.B gpg-cmd
+.B gpg\-cmd
 Execute a gpg command, as the monkeysphere user, on the monkeysphere
 authentication "sphere" keyring.  This takes a single argument
 (multiple gpg arguments need to be quoted).  Use this command with
