@@ -11,11 +11,11 @@
 	* aptitude update && aptitude full-upgrade
 	* added account 'daniel' for Dan Scott, and set him up with a way
 	  to publish to http://daniel.monkeysphere.info
-	
+
 2008-08-20 - dkg
 	* aptitude update && aptitude dist-upgrade: this includes
 	  monkeysphere 0.11-1 and OpenSSH 5.1p1-2
-	
+
 2008-08-18 - dkg
 	* moved monkeysphere apt repo entry to
 	  /etc/apt/sources.list.d/monkeysphere.list
@@ -24,16 +24,16 @@
 	* switched george's monkeysphere-server preferred keyserver to
 	  monkeysphere.info for the moment.  Both pgp.mit.edu and
 	  subkeys.pgp.net are sluggish right now :/
-	
+
 2008-08-16 - jrollins
 	* removed stale branches from jrollins from the master repo
 	* aptitude update && aptitude full-upgrade
 	* restarted services to clear up dependencies on old libraries
-	
+
 2008-08-13 - dkg
 	* aptitude update && aptitude full-upgrade
 	* restarted services to clear up dependencies on old libraries
-	
+
 2008-08-07 - dkg
 	* aptitude update && aptitude dist-upgrade
 	* removed debian's experimental from the sources.list
@@ -45,7 +45,7 @@
 	  george, using runit. (root-served repos are served from
 	  /srv/git, but ~USER/public_git is supported as well, if anyone
 	  wants to use that for publication).
-	
+
 2008-08-03 - dkg
 	* aptitude update && aptitude dist-upgrade
 	* installed iproute
