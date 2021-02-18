@@ -31,7 +31,6 @@ local domain=
 local trust=full
 local depth=1
 local keyID
-local importinfo
 local fingerprint
 local ltsignCommand
 local trustval

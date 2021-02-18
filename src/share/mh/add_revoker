@@ -35,6 +35,11 @@ keyID=$(check_key_input "$@")
 tmpDir=$(msmktempdir)
 trap "rm -rf $tmpDir" EXIT
 
+# make a temporary directory for storing keys during import, and set
+# the trap to delete it on exit
+tmpDir=$(msmktempdir)
+trap "rm -rf $tmpDir" EXIT
+
 # if file is specified
 if [ -f "$revokerKeyID" -o "$revokerKeyID" = '-' ] ; then
     # load the key from stdin
@@ -102,6 +107,24 @@ EOF
 	log debug "adding revoker without prompting."
     fi
 
+    # get the full fingerprint of new revoker key
+    log debug "getting fingerprint of revoker key..."
+    fingerprint=$(su_monkeysphere_user "gpg --list-key --with-colons --with-fingerprint 0x${keyID}!" \
+	| grep '^fpr:' | grep "$keyID" | cut -d: -f10)
+
+    log info "key found:"
+    su_monkeysphere_user "gpg --fingerprint 0x${fingerprint}!"
+
+    if [ "$PROMPT" = "true" ] ; then
+	echo "Are you sure you want to add the above key as a"
+	read -p "revoker of the host key? (Y/n) " OK; OK=${OK:-Y}
+	if [ "${OK/y/Y}" != 'Y' ] ; then
+	    failure "revoker not added."
+	fi
+    else
+	log debug "adding revoker without prompting."
+    fi
+
     # export the new key to the host keyring
     log debug "loading revoker key into host keyring..."
     su_monkeysphere_user "GNUPGHOME=$tmpDir gpg --quiet --export 0x${fingerprint}!" \
@@ -132,8 +155,8 @@ trap - EXIT
 rm -rf "$tmpDir"
 
 # core ltsigns the newly imported revoker key
-if echo "$addrevokerCommand" | \
-    gpg_core_edit ; then
+log debug "executing add revoker script..."
+if echo "$addrevokerCommand" | gpg_host_edit ; then
 
     update_gpg_pub_file
 
@@ -141,5 +164,9 @@ if echo "$addrevokerCommand" | \
 else
     failure "Problem adding revoker."
 fi
+
+# remove the temporary directory
+trap - EXIT
+rm -rf "$tmpDir"
 
 }
