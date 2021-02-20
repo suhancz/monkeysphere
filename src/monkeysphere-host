@@ -156,10 +156,10 @@ Service names look like <scheme>://full.example.com[:<portnumber>],
 where <scheme> is something like ssh or https, and <portnumber> is
 a decimal number (supplied only if the service is on a non-standard
 port)."
-    
+
     scheme=$(cut -f1 -d: <<<"$name")
     port=$(cut -f3 -d: <<<"$name")
-    
+
     # check that the scheme name is found in the system services
     # database
     available_=$(get_port_for_service "$scheme") || \
@@ -167,7 +167,7 @@ port)."
 
     # FIXME: if the service isn't found, or does not have a port, what
     # should we do? at the moment, we're just warning.
-    
+
     if [ -n "$port" ]; then
     # check that the port number is a legitimate port number (> 0, < 65536)
         [ "$port" -gt 0 ] && [ "$port" -lt 65536 ] || \
@@ -381,7 +381,7 @@ COMMAND="$1"
 shift
 
 case $COMMAND in
-    'import-key'|'i')
+    'import-key'|'import'|'i')
 	source "${MHSHAREDIR}/import_key"
 	import_key "$@"
 	;;
