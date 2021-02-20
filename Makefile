@@ -39,7 +39,7 @@ macports-portfile:
 	./utils/build-macports-portfile
 
 debian-package:
-	debuild -uc -us
+  git buildpackage -uc -us
 
 # don't explicitly depend on the tarball, since our tarball
 # (re)generation is not idempotent even when no source changes.
