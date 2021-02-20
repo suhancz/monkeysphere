@@ -24,7 +24,7 @@ CFLAGS += --pedantic -Wall -Werror
 all: src/agent-transfer/agent-transfer
 
 src/agent-transfer/agent-transfer: src/agent-transfer/main.c src/agent-transfer/ssh-agent-proto.h
-	gcc -o $@ $(CFLAGS) $(LDFLAGS) $<
+	gcc -o $@ $(CFLAGS) $(LDFLAGS) $< $(LIBS)
 
 debian-package:
 	git buildpackage -uc -us
