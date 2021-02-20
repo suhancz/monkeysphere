@@ -117,7 +117,7 @@ Please run 'monkeysphere-host import-key' import a key."
 check_key_input() {
     local keyID="$1"
     # array of fingerprints
-    local fprs=($(host_fingerprints))
+    local fprs=($(list_primary_fingerprints <"$HOST_KEY_FILE"))
 
     case ${#fprs[@]} in
 	0)
@@ -159,7 +159,7 @@ multi_key() {
     shift
     local keys=$@
     local i=0
-    local fprs=($(host_fingerprints))
+    local fprs=($(list_primary_fingerprints <"$HOST_KEY_FILE"))
     local key
 
     check_no_keys
