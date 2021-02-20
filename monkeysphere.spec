@@ -12,7 +12,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: gnupg
 Requires: openssh-clients
-BuildRequires: gcc
+BuildRequires: gcc git
 
 %description
 SSH key-based authentication is tried-and-true, but it lacks a true
