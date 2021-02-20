@@ -32,7 +32,7 @@ tarball: clean
 	rm -rf monkeysphere-$(MONKEYSPHERE_VERSION)
 	mkdir -p monkeysphere-$(MONKEYSPHERE_VERSION)/doc
 	ln -s ../../website/getting-started-user.mdwn ../../website/getting-started-admin.mdwn ../../doc/TODO ../../doc/MonkeySpec monkeysphere-$(MONKEYSPHERE_VERSION)/doc
-	ln -s ../COPYING ../etc ../Makefile ../man ../src ../tests monkeysphere-$(MONKEYSPHERE_VERSION)
+	ln -s ../changelog ../COPYING ../etc ../Makefile ../man ../src ../tests monkeysphere-$(MONKEYSPHERE_VERSION)
 	echo Monkeysphere $(MONKEYSPHERE_VERSION) > monkeysphere-$(MONKEYSPHERE_VERSION)/VERSION
 	echo -n "git revision " >> monkeysphere-$(MONKEYSPHERE_VERSION)/VERSION
 	git rev-parse HEAD >> monkeysphere-$(MONKEYSPHERE_VERSION)/VERSION
