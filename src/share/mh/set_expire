@@ -60,7 +60,7 @@ EOF
 
 update_pgp_pub_file
 
-if [ 0 == "$extendBy" ] ; then 
+if [ 0 == "$extendBy" ] ; then
     log info "Key ${keyID} no longer expires."
 else
     if expiry=$(gpg_host_list_keys "${keyID}" | grep ^pub: | head -n1 | cut -f7 -d: ) ; then

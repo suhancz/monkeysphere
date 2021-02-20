@@ -705,7 +705,7 @@ $foundkeyids
             fi
         fi
     fi
-    
+
     return "$returnCode"
 }
 
@@ -1033,7 +1033,7 @@ list_primary_fingerprints() {
 # the requested keys from the material on stdin
 get_cert_info() {
     local fake=$(msmktempdir)
-    
+
     cleanup() {
         if type gpgconf &>/dev/null; then
             GNUPGHOME="$fake" gpgconf --kill gpg-agent
