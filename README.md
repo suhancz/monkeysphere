@@ -1,2 +1,2 @@
 # monkeysphere
-Monkeysphere build based on the archive.org spec file from codewiz.org - USE AT YOUR OWN RISK
+Monkeysphere experimental Fedora build based on the spec file from codewiz.org - USE AT YOUR OWN RISK
