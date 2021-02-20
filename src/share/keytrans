@@ -864,23 +864,6 @@ sub findkeyfprs {
   }
 };
 
-sub getallprimarykeys {
-  my $instr = shift;
-
-  my $subs = { $packet_types->{pubkey} => \&findkeyfprs,
-               $packet_types->{seckey} => \&findkeyfprs,
-	     };
-  my $data = {target => { } };
-
-  packetwalk($instr, $subs, $data);
-
-  if (defined $data->{keys}) {
-    return $data->{keys};
-  } else {
-    return {};
-  }
-}
-
 sub packetwalk {
   my $instr = shift;
   my $subs = shift;
