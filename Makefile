@@ -27,11 +27,6 @@ src/transitions/*)
 
 REPLACED_COMPRESSED_MANPAGES = $(addsuffix .gz,$(addprefix replaced/,$(wildcard man/*/*)))
 
-all: src/agent-transfer $(addprefix replaced/,$(REPLACEMENTS)) $(REPLACED_COMPRESSED_MANPAGES)
-
-src/agent-transfer: src/agent-transfer/main.c src/agent-transfer/ssh-agent-proto.h
-	$(CC) -o $@ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $< $(LIBS)
-
 debian-package:
 	git buildpackage -uc -us
 
@@ -55,7 +50,6 @@ macports-portfile:
 	./util/build-macports-portfile
 
 clean:
-	rm -f src/agent-transfer/agent-transfer
 	rm -rf replaced/
 	# clean up old monkeysphere packages lying around as well.
 	rm -f monkeysphere_*
@@ -89,7 +83,6 @@ install: all installman
 	ln -sf ../share/monkeysphere/keytrans $(DESTDIR)$(PREFIX)/bin/openpgp2ssh
 	ln -sf ../share/monkeysphere/keytrans $(DESTDIR)$(PREFIX)/bin/openpgp2pem
 	ln -sf ../share/monkeysphere/keytrans $(DESTDIR)$(PREFIX)/bin/openpgp2spki
-	install -m 0755 src/agent-transfer/agent-transfer $(DESTDIR)$(PREFIX)/bin
 	install -m 0744 replaced/src/transitions/* $(DESTDIR)$(PREFIX)/share/monkeysphere/transitions
 	install -m 0644 src/transitions/README.txt $(DESTDIR)$(PREFIX)/share/monkeysphere/transitions
 	install -m 0644 src/share/m/* $(DESTDIR)$(PREFIX)/share/monkeysphere/m
@@ -118,14 +111,5 @@ releasenote:
 test: test-keytrans test-basic test-ed25519
 
 check: test
-
-test-basic: src/agent-transfer/agent-transfer
-	MONKEYSPHERE_TEST_NO_EXAMINE=true ./tests/basic
-
-test-ed25519: src/agent-transfer/agent-transfer
-	MONKEYSPHERE_TEST_NO_EXAMINE=true MONKEYSPHERE_TEST_USE_ED25519=true ./tests/basic
-
-test-keytrans: src/agent-transfer/agent-transfer
-	MONKEYSPHERE_TEST_NO_EXAMINE=true ./tests/keytrans
 
 .PHONY: all tarball debian-package freebsd-distinfo clean install installman releasenote test check
