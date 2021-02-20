@@ -38,17 +38,6 @@ freebsd-distinfo:
 macports-portfile:
 	./utils/build-macports-portfile
 
-debian-package:
-  git buildpackage -uc -us
-
-# don't explicitly depend on the tarball, since our tarball
-# (re)generation is not idempotent even when no source changes.
-freebsd-distinfo:
-	./utils/build-freebsd-distinfo
-
-macports-portfile:
-	./util/build-macports-portfile
-
 clean:
 	rm -rf replaced/
 	# clean up old monkeysphere packages lying around as well.
