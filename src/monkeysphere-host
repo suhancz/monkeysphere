@@ -34,7 +34,7 @@ MHSHAREDIR="${SYSSHAREDIR}/mh"
 MHDATADIR="${SYSDATADIR}/host"
 
 # host pub key files
-HOST_KEY_FILE="${SYSDATADIR}/host_keys.pub.gpg"
+HOST_KEY_FILE="${SYSDATADIR}/host_keys.pub.pgp"
 
 # UTC date in ISO 8601 format if needed
 DATE=$(date -u '+%FT%T')
@@ -337,8 +337,8 @@ case $COMMAND in
 	diagnostics
 	;;
 
-    'update-gpg-pub-file')
-	update_gpg_pub_file
+    'update-pgp-pub-file')
+	update_pgp_pub_file
 	;;
 
     'version'|'v')
