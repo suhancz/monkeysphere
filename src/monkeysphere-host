@@ -130,7 +130,7 @@ Please run 'monkeysphere-host import-key' to import a key."
 	*)
 	    if [ -z "$keyID" ] ; then
 		failure "Your host keyring contains multiple keys.
-Please specify one to act on (see 'monkeysphere-host show-key')."
+Please specify one to act on (see 'monkeysphere-host show-keys')."
 	    fi
 	    ;;
     esac
