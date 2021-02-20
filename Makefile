@@ -1,4 +1,6 @@
-#!/usr/bin/make -f
+CFLAGS +=  $(shell libassuan-config --cflags --libs)
+CFLAGS +=  $(shell libgcrypt-config --cflags --libs)
+CFLAGS += --pedantic -Wall -Werror
 
 # Makefile for monkeysphere
 
