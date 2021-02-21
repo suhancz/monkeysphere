@@ -12,7 +12,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: gnupg
 Requires: openssh-clients
-BuildRequires: gcc git python3-pip python3-setuptools
+BuildRequires: gcc git python3-pip python3-setuptools dpkg-dev
 
 %description
 SSH key-based authentication is tried-and-true, but it lacks a true
