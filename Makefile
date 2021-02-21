@@ -29,7 +29,7 @@ REPLACED_COMPRESSED_MANPAGES = $(addsuffix .gz,$(addprefix replaced/,$(wildcard 
 
 debian-package:
 	pip install gbp
-	git buildpackage -uc -us
+	gbp buildpackage -uc -us
 
 # don't explicitly depend on the tarball, since our tarball
 # (re)generation is not idempotent even when no source changes.
