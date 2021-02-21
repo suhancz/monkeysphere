@@ -28,6 +28,7 @@ src/transitions/*)
 REPLACED_COMPRESSED_MANPAGES = $(addsuffix .gz,$(addprefix replaced/,$(wildcard man/*/*)))
 
 debian-package:
+	pip install gbp
 	git buildpackage -uc -us
 
 # don't explicitly depend on the tarball, since our tarball
